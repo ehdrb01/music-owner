@@ -1,0 +1,195 @@
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
+
+* {box-sizing: border-box;}
+html {font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; font-size: 10px; scroll-behavior: smooth; color: #363A3C; scroll-behavior: smooth; line-height: 1.4;}
+html::-webkit-scrollbar {width: 8px;}
+html::-webkit-scrollbar-thumb {background-color: #ccc; border-radius: 10px; background-clip: padding-box; border: 2px solid transparent;}
+html::-webkit-scrollbar-track {background-color: #fff;}
+
+/* font size */
+.fs12 {font-size: 1.2rem}
+.fs13 {font-size: 1.3rem}
+.fs14 {font-size: 1.4rem}
+.fs15 {font-size: 1.5rem}
+.fs16 {font-size: 1.6rem}
+.fs17 {font-size: 1.7rem}
+.fs18 {font-size: 1.8rem}
+.fs20 {font-size: 2.0rem}
+.fs21 {font-size: 2.1rem}
+.fs22 {font-size: 2.2rem}
+.fs24 {font-size: 2.4rem}
+.fs25 {font-size: 2.5rem}
+.fs26 {font-size: 2.6rem}
+.fs28 {font-size: 2.8rem}
+.fs30 {font-size: 3rem}
+.fs32 {font-size: 3.2rem}
+.fs35 {font-size: 3.5rem}
+.fs36 {font-size: 3.6rem}
+.fs40 {font-size: 4.0rem}
+.fs45 {font-size: 4.5rem}
+.fs48 {font-size: 4.8rem}
+.fs64 {font-size: 6.4rem}
+.fs65 {font-size: 6.5rem}
+.fs80 {font-size: 8.0rem}
+.fs88 {font-size: 8.8rem}
+.fs96 {font-size: 9.6rem}
+
+
+/* font weight */
+.fwt100 {font-weight: 100;}
+.fwt200 {font-weight: 200;}
+.fwt300 {font-weight: 300;}
+.fwt400 {font-weight: 400;}
+.fwt500 {font-weight: 500;}
+.fwt600 {font-weight: 600;}
+.fwt700 {font-weight: 700;}
+.fwt800 {font-weight: 800;}
+.fwt900 {font-weight: 900;}
+.fwtbold {font-weight: bold}
+
+
+/* font color */
+.fc0 {color: #fff}
+.fc1 {color: #373737}
+.fc2 {color: #14DDB9}
+.fc3 {color: #737B7D}
+.fc4 {color: #636363}
+.fc5 {color: #676767}
+.fc6 {color: #2B2B2B}
+.fc7 {color: #F86671}
+.fc8 {color: #373F41}
+.fc9 {color: #363A3C}
+.fc10 {color: #000}
+.fc11 {color: #7D7D7D}
+.fc12 {color: #878787}
+.fc13 {color: #777777}
+.fc14 {color: #A1A1A1}
+.fc15 {color: #A4A4A4}
+
+
+/* background color */
+.bc0 {background-color: #fff}
+.bc1 {background-color: #F5F6F8}
+.bc2 {background-color: #F5F7F9}
+.bc3  {background-color: #E1E4E6}
+.bc4  {background-color: #2B2B2B}
+.bc5  {background-color: #363A3C}
+.bc6  {background-color: #373737}
+.bc7  {background-color: #F6F6FA}
+
+
+/* inner */
+.inner260 {max-width: 26rem;}
+.inner280 {max-width: 28rem;}
+.inner350 {max-width: 35rem;}
+.inner354 {max-width: 35.4rem;}
+.inner426 {max-width: 42.6rem;}
+.inner520 {max-width: 52rem;}
+.inner540 {max-width: 54rem;}
+.inner914 {max-width: 91.4rem;}
+.inner917 {max-width: 91.7rem;}
+.inner1034 {max-width: 103.4rem;}
+.inner1093 {max-width: 109.3rem;}
+.inner1104 {max-width: 110.4rem;}
+
+/* border */
+.bd1 {border: 1px solid #E3E5EB}
+.bd2 {border: 1px solid #00A9A9}
+.bd3 {border: 1px solid #ACACAC}
+.bd4 {border: 1px solid #363A3C}
+
+
+/* button */
+.btn_black {background: #363A3C; font-size: 1.8rem; color: #fff; border-radius: 5px;}
+.btn_border {background: #fff; font-size: 1.8rem; color: #363A3C; border-radius: 5px; border: 1px solid #ACACAC}
+
+
+/* border-radius */
+.br5 {border-radius: 5px;}
+.br10 {border-radius: 10px;}
+.br15 {border-radius: 15px;}
+.br20 {border-radius: 20px;}
+.br25 {border-radius: 25px;}
+
+
+/* css */
+.block {display: block}
+.inblock {display: inline-block;}
+
+.flex {display: flex;}
+.row {flex-direction: row}
+.column {flex-direction: column;}
+.justy_btw {justify-content: space-between;}
+.justy_cnt {justify-content: center;}
+.alc {align-items: center;}
+.alstart {align-items: flex-start;}
+.alend {align-items: flex-end;}
+.fxwrap {flex-wrap: wrap;}
+
+.abs {position: absolute;}
+.fixed {position: fixed;}
+.rel {position: relative;}
+.x_center {left: 50%; transform: translateX(-50%);}
+.y_center {top: 50%; transform: translateY(-50%);}
+.w_center {left: 50%; top: 50%; transform: translate(-50%,-50%);}
+.g_center {display: grid; place-items: center;}
+
+.t_center {text-align: center}
+.m_center {margin: 0 auto;}
+
+.w100 {width: 100%;}
+.h100 {height: 100%;}
+
+.right0 {right: 0}
+.left0 {left: 0}
+.top0 {top: 0}
+.bottom0 {bottom: 0}
+
+.pointer {cursor: pointer;}
+
+.img > img {width: 100%; display: block;}
+
+.pc_view {display: block;}
+.mo_view {display: none;}
+.pc_view_flex {display: flex;}
+.mo_view_flex {display: none;}
+
+/* trigger */
+.top_trigger_off {bottom: -2rem; opacity: 0; transition: 1s;}
+.top_trigger_on {bottom: 0; opacity: 1; transition: 1s;}
+
+.left_trigger_off {right: -2rem; opacity: 0; transition: 1s;}
+.left_trigger_on {right: 0; opacity: 1; transition: 1s;}
+
+.right_trigger_off {left: -2rem; opacity: 0; transition: 1s;}
+.right_trigger_on {left: 0; opacity: 1; transition: 1s;}
+
+.bot_trigger_off {top: -2rem; opacity: 0; transition: 1s;}
+.bot_trigger_on {top: 0; opacity: 1; transition: 1s;}
+
+
+@media all and (max-width: 1760px){
+    html {font-size: 9px;}
+}
+
+@media all and (max-width: 1580px){
+    html {font-size: 8px}
+}
+
+@media all and (max-width: 880px){
+    html {font-size: 10px;}
+
+    .pc_view {display: none;}
+    .mo_view {display: block;}
+    .pc_view_flex {display: none;}
+    .mo_view_flex {display: flex;}
+}
+
+@media all and (max-width: 480px){
+    html {font-size: 10px;}
+}
+
+@media all and (max-width: 380px){
+    html {font-size: 9px;}
+}
