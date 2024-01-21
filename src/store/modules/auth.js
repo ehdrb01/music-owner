@@ -3,7 +3,9 @@ const authModule = {
     state: {
         isLogin: false,
         userId: '',
-        userPass: ''
+        password: '',
+        token: '',
+        userType: ''
     },
     getters: {
         userInfo(state) {
@@ -13,17 +15,21 @@ const authModule = {
     mutations: {
         SET_USER_INFO(state, data) {
             state.isLogin = true;
-            state.userId = data.id;
-            state.userPass = data.pass;
+            state.userId = data.userId;
+            state.password = data.password;
+            state.token = data.token;
+            state.userType = data.userType;
         },
         SET_USER_RESET(state, data) {
             state.isLogin = false;
-            state.userId = data.id;
-            state.userPass = data.id;
+            state.userId = data.userId;
+            state.password = data.userId;
+            state.token = data.userId;
+            state.userType = data.userId;
         },
         SET_USER_ERROR(state, errordata) {
             state.isLogin = false;
-            state.userId = data.id;
+            state.userId = data.userId;
             console.log(errordata);
         }
     },
@@ -35,6 +41,12 @@ const authModule = {
             };
             // 로그인 임시처리
             context.commit('SET_USER_INFO', params);
+            console.log('context');
+            console.log(context);
+            console.log('value');
+            console.log(value);
+            console.log('params');
+            console.log(params);
             localStorage.setItem('userInfo', JSON.stringify(params));
             //로그인 API 호출
             // return new Promise((resolve, reject) => {

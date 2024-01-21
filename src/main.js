@@ -4,6 +4,7 @@ import router from '@/router';
 import store from '@/store';
 import BootstrapVue from 'bootstrap-vue';
 
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import '@/plugins/lodash';
 import '@/plugins/toasted';
 import i18n from '@/plugins/i18n';

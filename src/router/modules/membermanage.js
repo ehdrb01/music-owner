@@ -6,29 +6,14 @@ const membermanage = [
         children: [
             
             {
-                path: '/mypage',
-                name: 'mypage',
-                component: () => import('@/views/membermanage/mypage.vue')
+                path: '/adminLogin',
+                name: 'adminLogin',
+                component: () => import('@/views/membermanage/adminLogin.vue')
             },
             {
-                path: '/showId',
-                name: 'showId',
-                component: () => import('@/views/membermanage/showId.vue')
-            },
-            {
-                path: '/showIdNone',
-                name: 'fshowIdNone',
-                component: () => import('@/views/membermanage/showIdNone.vue')
-            },
-            {
-                path: '/withdraw',
-                name: 'fwithdraw',
-                component: () => import('@/views/membermanage/withdraw.vue')
-            },
-            {
-                path: '/withdrawEnd',
-                name: 'fwithdrawEnd',
-                component: () => import('@/views/membermanage/withdrawEnd.vue')
+                path: '/manageStore',
+                name: 'manageStore',
+                component: () => import('@/views/membermanage/manageStore.vue')
             }
         ]
     }

@@ -1,31 +1,29 @@
 <template>
   <header id="header">
-    <div class="header_inner bc1 fixed w100 top0">
-      <div class="inner inner1093 w100 m_center flex justy_btw alc">
-        <div class="logo">
-          <a class="img" @click="goIndex">
-            <img src="@/assets/img/logo.png" alt=""/></a>
-        </div>
-        <div class="menu flex alc">
-           <!-- <div class="fc8 fs14">
-              <a href="">로그아웃</a>
+    <div class="header_inner bc1 fixed w100 top0 bc_01">
+      <div class="inner inner1093 w100 m_center flex justy_btw alc bc_01">
+        <div class="header_title">
+            <div class="left" @click="goList"  v-show="!state.isAdmin">
+                <i class="bi bi-music-player-fill"></i>
             </div>
-            <div class="fs14 fwt500 login_btn fc0">
-                <a @click="goMypage()" class="block bc6">내 정보</a>
-            </div> -->
-          <div class="fc8 fs14" @click="goSign()">
-            회원가입
-          </div>
-          <div class="fs14 fwt500 login_btn fc0"  @click="goLogin()">
-            <a class="block bc6">로그인</a>
-          </div>
+            <div class="title" >
+                {{ $route.name==
+                'index'?'음악신청하기':
+                $route.name=='playlist'?'플레이리스트':
+                $route.name=='adminLogin'?'관리자로그인':
+                $route.name=='manageStore'?'스토어관리':
+                '' }}
+             </div>
+            <div class="right" @click="goMain" v-show="!state.isAdmin">
+                <i class="bi bi-signal"></i>
+            </div>
         </div>
       </div>
     </div>
   </header>
 </template>
 <script>
-import { reactive } from 'vue';
+import { reactive, onMounted} from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 export default {
     components: {},
@@ -33,30 +31,31 @@ export default {
         const router = useRouter();
         const route = useRoute();
         const state = reactive({
-          
+            path: useRoute().path,
+            storeInfo: {},
+            isAdmin: false
         });
-        const goLogin = () => {
+        onMounted(() => {
+            state.storeInfo =  JSON.parse(localStorage.getItem('userInfo'));
+            if (state.storeInfo?.userType == 'admin') {
+                state.isAdmin = true;
+            } else {
+                state.isAdmin = false;
+            }
+        });
+
+        const goList = () => {
             router.push({
-                path: '/login'
+                path: '/playlist/' + route.params.storeNo
             });
         };
-        const goSign = () => {
+        const goMain = () => {
             router.push({
-                path: '/sign'
-            });
-        };
-        const goMypage = () => {
-            router.push({
-                path: '/mypage'
-            });
-        };
-        const goIndex = () => {
-            router.push({
-                path: '/'
+                path: '/index/' + route.params.storeNo
             });
         };
 
-        return {state, goLogin, goSign, goIndex, goMypage};
+        return {state, route, goList, goMain};
     }
 };
 </script>

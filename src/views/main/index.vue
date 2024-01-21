@@ -1,230 +1,148 @@
 <template>
-  <div id="main" class="pt52">
-    <!-- 메인 비쥬얼 -->
-    <div class="visual">
-      <div class="inner w100 m_center rel">
-        <div class="cont flex alstart justy_btw">
-          <div class="txt_area">
-            <div class="title fs45 fwt700 fc6">
-              일잘러는<br />
-              모두의 인터뷰에서<br />
-              답을 찾습니다.
-            </div>
-            <div class="wrt fs15 fwt500">
-              고객 인터뷰를 통해<br class="mo_view" />
-              고객들의 진짜 의견을 들어보세요.
-            </div>
-            <button class="enroll fc0 fwt500" @click="goWrite()">
-              <a class="inblock btn_black br25">
-                인터뷰 등록하기
-              </a>
-            </button>
-            <div class="link pc_view" @click="goList()">
-              <a class="fs15 fwt500">
-                모집중인 인터뷰도 확인해보세요 >
-              </a>
-            </div>
-          </div>
+  <div id="main" class="pt52 bc_01">
+    <div id="write" class="pt52 pb10">
 
-          <div class="img_area img pc_view">
-            <img src="@/assets/img/main_img.svg" alt="" />
-          </div>
-        </div>
-      </div>
-    </div>
+      <div class="inner inner1104 m_center w100"><!--섹션1---------------------------------------->
 
-    <!-- 메인 컨텐츠 -->
-    <div class="content bc2">
-      <div class="inner inner1104 w100 m_center">
-        <div class="title flex alc fs25 fwt600">📋 지금 모집중이에요.</div>
+        <div class="wrt_sec wrt_sec_3 flex"><!--타이틀 & 이미지-->
+          <div class="title_area">
 
-        <!-- 공통 리스트 디자인 -->
-        <div id="comp_lst_area">
-          <ul class="comp_lst flex fxwrap">
-            <li class="lst">
-              <a @click="goDetail(2)">
-                <div class="img">
-                  <img src="@/assets/img/sample_img_1.png" alt="" />
-                </div>
-                <div class="cont flex justy_btw">
-                  <div class="txt">
-                    <div class="tit fc6 fs15 fwt600">
-                      의류 재활용 관련 공모전 인터뷰이 모집합니다.
-                    </div>
-                    <ul class="loca fc5 fs13 flex fwt500">
-                      <li>대면</li>
-                      <li>서울</li>
-                    </ul>
-                    <div class="price fs13 fwt600 fc6">사례비 30,000원</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-
-            <li class="lst">
-              <a href="">
-                <div class="img">
-                  <img src="@/assets/img/sample_img_2.png" alt="" />
-                </div>
-                <div class="cont flex justy_btw">
-                  <div class="txt">
-                    <div class="tit fc6 fs15 fwt600">
-                      의류 재활용 관련 공모전 인터뷰이 모집합니다.
-                    </div>
-                    <ul class="loca fc5 fs13 flex fwt500">
-                      <li>대면</li>
-                      <li>서울</li>
-                    </ul>
-                    <div class="price fs13 fwt600 fc6">사례비 30,000원</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-
-            <li class="lst">
-              <a href="">
-                <div class="img">
-                  <img src="@/assets/img/sample_img_3.png" alt="" />
-                </div>
-                <div class="cont flex justy_btw">
-                  <div class="txt">
-                    <div class="tit fc6 fs15 fwt600">
-                      의류 재활용 관련 공모전 인터뷰이 모집합니다.
-                    </div>
-                    <ul class="loca fc5 fs13 flex fwt500">
-                      <li>대면</li>
-                      <li>서울</li>
-                    </ul>
-                    <div class="price fs13 fwt600 fc6">사례비 30,000원</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-
-            <li class="lst">
-              <a href="">
-                <div class="img">
-                  <img src="@/assets/img/sample_img_4.png" alt="" />
-                </div>
-                <div class="cont flex justy_btw">
-                  <div class="txt">
-                    <div class="tit fc6 fs15 fwt600">
-                      의류 재활용 관련 공모전 인터뷰이 모집합니다.
-                    </div>
-                    <ul class="loca fc5 fs13 flex fwt500">
-                      <li>대면</li>
-                      <li>서울</li>
-                    </ul>
-                    <div class="price fs13 fwt600 fc6">사례비 30,000원</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-
-            <li class="lst">
-              <a href="">
-                <div class="img">
-                  <img src="@/assets/img/sample_img_5.png" alt="" />
-                </div>
-                <div class="cont flex justy_btw">
-                  <div class="txt">
-                    <div class="tit fc6 fs15 fwt600">
-                      의류 재활용 관련 공모전 인터뷰이 모집합니다.
-                    </div>
-                    <ul class="loca fc5 fs13 flex fwt500">
-                      <li>대면</li>
-                      <li>서울</li>
-                    </ul>
-                    <div class="price fs13 fwt600 fc6">사례비 30,000원</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-
-            <li class="lst">
-              <a href="">
-                <div class="img">
-                  <img src="@/assets/img/sample_img_6.png" alt="" />
-                </div>
-                <div class="cont flex justy_btw">
-                  <div class="txt">
-                    <div class="tit fc6 fs15 fwt600">
-                      의류 재활용 관련 공모전 인터뷰이 모집합니다.
-                    </div>
-                    <ul class="loca fc5 fs13 flex fwt500">
-                      <li>대면</li>
-                      <li>서울</li>
-                    </ul>
-                    <div class="price fs13 fwt600 fc6">사례비 30,000원</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-
-            <li class="lst">
-              <a href="">
-                <div class="img">
-                  <img src="@/assets/img/sample_img_7.png" alt="" />
-                </div>
-                <div class="cont flex justy_btw">
-                  <div class="txt">
-                    <div class="tit fc6 fs15 fwt600">
-                      의류 재활용 관련 공모전 인터뷰이 모집합니다.
-                    </div>
-                    <ul class="loca fc5 fs13 flex fwt500">
-                      <li>대면</li>
-                      <li>서울</li>
-                    </ul>
-                    <div class="price fs13 fwt600 fc6">사례비 30,000원</div>
-                  </div>
-                </div>
-              </a>
-            </li>
-
-            <li class="lst">
-              <a href="">
-                <div class="img">
-                  <img src="@/assets/img/sample_img_8.png" alt="" />
-                </div>
-                <div class="cont flex justy_btw">
-                  <div class="txt">
-                    <div class="tit fc6 fs15 fwt600">
-                      의류 재활용 관련 공모전 인터뷰이 모집합니다.
-                    </div>
-                    <ul class="loca fc5 fs13 flex fwt500">
-                      <li>대면</li>
-                      <li>서울</li>
-                    </ul>
-                    <div class="price fs13 fwt600 fc6">사례비 30,000원</div>
-                  </div>
-                </div>
-              </a>
+            <div class="title fs35 fwt600"><i class="bi bi-pin-map-fill mo_view"></i> 실시간 현재위치 </div>
+          </div><!--담당자-->
+          <ul class="lst_area">
+            <li>
+              <div class="tit fs17 fwt500">상호명</div>
+              <input type="text" class="wrt_ipt readonly" readonly="readonly" v-model="state.store.storeNm">
             </li>
           </ul>
         </div>
-
-        <!-- 더보기 - 리스트 이동  -->
-        <div class="more_btn_wrap flex alc">
-          <div class="more_btn inblock fs18 fwt500 fc0 bc4 m_center">
-            <a @click="goList" class="block">더 많은 인터뷰 확인하기</a
-            >
+        <!--섹션2---------------------------------------->
+        <!-- <div class="wrt_sec wrt_sec_2 flex">
+          <div class="title_area">
+            <div class="title fs35 fwt600"><i class="bi bi-music-note mo_view"></i>  허용 노래장르 </div>
           </div>
-        </div>
+          <ul class="cate_area inline-flex fxwrap w100">
+            <li>
+              <input type="checkbox" name="wrt_cate" id="wrt_cate_1 " value="mobileUsed"><label for="wrt_cate_1"
+                class="flex alc h70">
+                <div class="txt flex column h70">
+                  <div class="tit fs16 fwt500">ROCK</div>
+                </div>
+              </label>
+            </li>
+          </ul>
+        </div> -->
+        <!--섹션3---------------------------------------->
+        <div class="wrt_sec wrt_sec_3 flex"><!--타이틀-->
+          <div class="title_area">
+            <div class="title fs35 fwt600"><i class="bi bi-pencil-fill mo_view"></i> 신청곡 입력하기 </div>
+          </div><!--담당자-->
+          <ul class="lst_area">
+            <li>
+              <div class="tit fs17 fwt500">가수명</div><input type="text" class="wrt_ipt" v-model="state.req.reqSingerNm">
+            </li>
+            <li>
+              <div class="tit fs17 fwt500">노래제목</div><input type="text" class="wrt_ipt" v-model="state.req.reqSongNm">
+            </li>
+            <li>
+              <div class="tit fs17 fwt500">노래영상url</div><input type="text" class="wrt_ipt" v-model="state.req.musicUrl">
+            </li>
+            <li>
+              <div class="prv_agree fs14" style="margin-top:12px;">
+                <!-- <input type="checkbox" name="wrt_agree" id="wrt_agree" checked="" disabled="true"> -->
+                <label for="wrt_agree" class="pointer"># 모든 노래는 익명으로 신청 됩니다.
+                </label>
+
+                <div>
+                  <label for="wrt_agree" class="pointer color_red" v-if="state.errorMSg">{{ state.errorMSg }}
+                  </label>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div><!--섹션5---------------------------------------->
+
+
+        <!-- :disabled-start-date=""
+    :disabled-end-date=""
+    :text-format=""
+    :date-format=""
+    :disabled=""
+    :placeholder=""
+    :circle=""
+    :show-clear-button=""
+    :show-picker-inital="" --><!--등록 버튼---------------------------------------->
+        <div class="submit_btn t_center"><button class="btn_black" @click="insertMusic">등록하기</button></div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { _getStore, _insertMusic } from '@/api/ourplay.js';
+
 export default {
     components: {},
-    setup() {
+    props: ['storeNo'],
+    setup(props) {
         const router = useRouter();
         const route = useRoute();
         const state = reactive({
-          
+            store: {},
+            req: {
+
+            },
+            errorMSg: ''
         });
+        onMounted(() => {
+            getStore();
+            state.req.reqStoreNo = props.storeNo;
+            console.log('storeNo:', props.storeNo);
+        });
+        const getStore = async () => {
+            const response = await _getStore(props.storeNo);
+            try {
+                if (response.data.code === 200) {
+                    console.log(response.data.data);
+                    state.store = response.data.data;
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        const insertMusic = async () => {
+            if (!state.req.reqSingerNm) {
+                // toast('d', 3000, 'success');
+                state.errorMSg = '가수를 입력해주세요';
+                return;
+            }
+            if (!state.req.reqSongNm) {
+                state.errorMSg = '노래를 입력해주세요';
+                return;
+            }
+            if (!state.req.musicUrl) {
+                state.errorMSg = '유투브 링크를 입력해주세요';
+                return;
+            }
+            state.errorMSg = '';
+            const response = await _insertMusic(state.req);
+            try {
+                if (response.data.code === 200) {
+                    alert('신청곡이 등록 되었습니다');
+                    state.req.reqSingerNm = '';
+                    state.req.reqSongNm = '';
+                    state.req.musicUrl = '';
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
         const goWrite = () => {
             router.push({
                 path: '/product/write'
@@ -233,7 +151,7 @@ export default {
         const goDetail = (v) => {
             router.push({
                 path: '/product/view',
-                params: {id: v}
+                params: { id: v }
             });
         };
         const goList = () => {
@@ -242,7 +160,7 @@ export default {
             });
         };
 
-        return {state, goWrite, goDetail, goList};
+        return { state, goWrite, goDetail, goList, insertMusic };
     }
 };
 </script>

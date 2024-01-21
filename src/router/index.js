@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import playlist from '@/router/modules/playlist.js';
 import membermanage from '@/router/modules/membermanage.js';
-import member from '@/router/modules/member.js';
-import product from '@/router/modules/product.js';
 import mainPage from '@/router/modules/mainPage.js';
 
 const routes = [
@@ -16,9 +15,8 @@ const routes = [
         name: 'sample',
         component: () => import('@/views/sample/Sample.vue')
     },
+    ...playlist,
     ...membermanage,
-    ...member,
-    ...product,
     ...mainPage
 
 ];

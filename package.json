@@ -1,5 +1,5 @@
 {
-  "name": "moview",
+  "name": "ourplaylist",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
     "@vue/compat": "^3.3.4",
     "axios": "^1.4.0",
     "bootstrap": "^4.6.2",
+    "bootstrap-icons": "^1.11.3",
     "bootstrap-vue": "^2.23.1",
     "chart.js": "^4.3.0",
     "lodash": "^4.17.21",

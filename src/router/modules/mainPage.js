@@ -5,9 +5,10 @@ const mainPage = [
         component: () => import('@/layout/index.vue'),
         children: [
             {
-                path: '/index',
+                path: '/index/:storeNo',
                 name: 'index',
-                component: () => import('@/views/main/index.vue')
+                component: () => import('@/views/main/index.vue'),
+                props: true
             }
         ]
     }
