@@ -5,19 +5,27 @@ import mainPage from '@/router/modules/mainPage.js';
 
 const routes = [
     {
-        redirect: '/index',
         path: '',
-        name: ''
-        // component: () => import('@/layout/Index.vue')
+        redirect: '/index',
+        name: 'index'
+    },
+    {
+        redirect: '',
+        path: '',
+        name: 'layout',
+        component: () => import('@/layout/Index.vue'),
+        children: [
+            ...playlist,
+            ...membermanage,
+            ...mainPage
+        ]
     },
     {
         path: '/sample',
         name: 'sample',
         component: () => import('@/views/sample/Sample.vue')
-    },
-    ...playlist,
-    ...membermanage,
-    ...mainPage
+    }
+  
 
 ];
 const router = createRouter({
