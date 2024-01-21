@@ -2,7 +2,7 @@ const mainPage = [
     {
         // path: '/',
         // name: '',
-        component: () => import('@/layout/index.vue'),
+        // component: () => import('@/layout/index.vue'),
         children: [
             {
                 path: '/index/:storeNo',

@@ -2,7 +2,7 @@ const membermanage = [
     {
         // path: '/main',
         // name: 'layout',
-        component: () => import('@/layout/index.vue'),
+        // component: () => import('@/layout/index.vue'),
         children: [
             
             {

@@ -2,7 +2,7 @@ const product = [
     {
         // path: '/product',
         // name: 'product',
-        component: () => import('@/layout/index.vue'),
+        // component: () => import('@/layout/index.vue'),
         children: [
             {
                 path: '/product/list',
