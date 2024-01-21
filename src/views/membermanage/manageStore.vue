@@ -73,7 +73,8 @@ export default {
         const state = reactive({
             storeList: [],
             regStore: {},
-            baseUrl: window.location.origin,
+            baseUrl: 'http://13.209.35.219/',
+            // window.location.origin,
             googQr: 'https://chart.apis.google.com/chart?cht=qr&chs=250x250&chl='
         });
         onMounted(() => {
