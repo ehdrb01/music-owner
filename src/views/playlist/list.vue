@@ -35,7 +35,7 @@
                 </div>
                 <div class="type"> 일반</div>
                 <div class="play_icon" @click="playMusic(item)"><i class="bi bi-youtube"></i></div>
-                <div v-if="state.storeInfo.adminYn==true" class="type" @click="nextMusic(item)">재생완료하기</div>
+                <div v-if="state.storeInfo?.adminYn==true" class="type" @click="nextMusic(item)">재생완료하기</div>
                 <!-- <div class="play_icon" @click="nextMusic(item)"><i class="bi bi-chevron-bar-right"></i></div> -->
               </div>
               <div class="player" :class="item.openYn == 'N' ? 'h0' : 'h300'" v-if="item.openYn == 'Y'">
