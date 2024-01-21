@@ -3,7 +3,7 @@
         <div class="footer_inner" style="background: #f5f5f5;">
             <div class="inner w100 inner1104 m_center flex">
                 <div class="ft_logo pc_view" @click="goLogin()" style="display: flex;flex-direction: column;align-items:center;">
-                        <img src="@/assets/img/music_canvas.png" alt="" style="width:100%;">
+                        <!-- <img src="@/assets/img/music_canvas.png" alt="" style="width:100%;"> -->
                         <div style="align-items: center;font-size: 12px;font-weight: 900;color: #7c4672;text-align: center;">OUR.PLAY<br>LIST</div>
                 </div>
                 <div style="width:70%">
