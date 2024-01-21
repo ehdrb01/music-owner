@@ -4,6 +4,7 @@
     <!-- 리스트 컨텐츠 -->
     <div class="content bc8 " id="storelist">
       <div class="inner inner1104 w100 m_center">
+        
         <!-- 공통 리스트 디자인 -->
         <div id="comp_lst_area">
           <ul class="comp_lst flex fxwrap">
@@ -68,10 +69,11 @@ export default {
     components: {},
     setup() {
         const router = useRouter();
+        const route = useRoute();
         const state = reactive({
             storeList: [],
             regStore: {},
-            baseUrl: import.meta.env.VITE_APP_BASE_API,
+            baseUrl: window.location.origin,
             googQr: 'https://chart.apis.google.com/chart?cht=qr&chs=250x250&chl='
         });
         onMounted(() => {
