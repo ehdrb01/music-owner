@@ -2,7 +2,7 @@ const member = [
     {
         // path: '/member',
         // name: 'member',
-        component: () => import('@/layout/index.vue'),
+        // component: () => import('@/layout/index.vue'),
         children: [
             {
                 path: '/playlist/:storeNo',
