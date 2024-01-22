@@ -1,7 +1,6 @@
 <template>
   <div id="main" class="pt52 bc_01">
     <div id="write" class="pt52 pb10">
-      /{{ state.store }}/
       <div class="inner inner1104 m_center w100" v-if="state.store">
         <!--섹션1---------------------------------------->
         <div class="wrt_sec wrt_sec_3 flex"><!--타이틀 & 이미지-->
