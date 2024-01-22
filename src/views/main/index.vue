@@ -1,7 +1,7 @@
 <template>
-  <div id="main" class="pt52 bc_01">
-    <div id="write" class="pt52 pb10">
-      <div class="inner inner1104 m_center w100" v-if="state.store">
+  <div id="main" class="bc_01">
+    <div id="write" class="pb10 bc_01">
+      <div class="inner inner1104 m_center w100" v-if="props?.storeNo">
         <!--섹션1---------------------------------------->
         <div class="wrt_sec wrt_sec_3 flex"><!--타이틀 & 이미지-->
           <div class="title_area">
@@ -50,7 +50,7 @@
             <li>
               <div class="prv_agree fs14" style="margin-top:12px;">
                 <!-- <input type="checkbox" name="wrt_agree" id="wrt_agree" checked="" disabled="true"> -->
-                <label for="wrt_agree" class="pointer"># 모든 노래는 익명으로 신청 됩니다.
+                <label for="wrt_agree" class="pointer">※ 모든 노래는 익명으로 신청 됩니다.
                 </label>
 
                 <div>
@@ -163,7 +163,7 @@ export default {
       });
     };
 
-    return { state, goWrite, goDetail, goList, insertMusic };
+    return { state, goWrite, goDetail, goList, insertMusic, props };
   }
 };
 </script>
