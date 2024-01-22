@@ -661,12 +661,23 @@ input[type='password'].readonly {
     flex-wrap: nowrap;
     flex-direction: row;
 }
+
+.music_info .song {
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
+}
 #playlist .music_info div {
     padding: 0 4px;
 }
 #playlist .comp_lst {
     gap: 0;
 }
+
 .not_playlist {
     font-size: medium;
     color: #fff;

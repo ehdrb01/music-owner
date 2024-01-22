@@ -24,8 +24,6 @@
           <div id="comp_lst_area">
             <ul class="comp_lst flex fxwrap" v-if="state.musiclist.length > 0">
               <!-- 리스트 each-->
-              {{ state.storeInfo?.adminYn }}
-              {{ state.storeInfo }}
               <li v-for="(item, index) in  state.musiclist " :class="item.playingYn == 'N' ? 'h50' : 'h350'" :key="index"
                 class=" playing">
                 <div class="music_list" :class="item.playingYn == 'Y' ? 'glow' : ''">
