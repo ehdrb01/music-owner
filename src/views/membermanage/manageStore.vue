@@ -1,5 +1,5 @@
 <template>
-  <div id="list" class="pt53">
+  <div id="list" class="">
     <!-- 리스트 카테고리 -->
     <!-- 리스트 컨텐츠 -->
     <div class="content bc8 " id="storelist">
@@ -8,10 +8,34 @@
         <!-- 공통 리스트 디자인 -->
         <div id="comp_lst_area">
           <ul class="comp_lst flex fxwrap">
+            <li class="store_list">
+                <div class="store_info">
+                  <div class="store_no">
+                    순서
+                  </div>
+                  <div class="store_name">
+                    상호명
+                  </div>
+                  <div class="store_owner">
+                    이름
+                  </div>
+                  <div class="store_id">
+                    아이디
+                  </div>
+                  <div class="store_pass">
+                    비밀번호
+                  </div>
+                  <div class="store_btn">
+                    기능
+                  </div>
+                </div>
+            </li>
             <!-- 리스트 each-->
               <li class="store_list" v-for="(item, index) in state.storeList" :key="index">
                 <div class="store_info">
-                  {{ item.storeNo }}
+                  <div class="store_no">
+                    {{ item.storeNo }}
+                  </div>
                   <div class="store_name">
                     <input type="text" class="wrt_ipt" v-model="item.storeNm">
                   </div>
@@ -30,13 +54,18 @@
                     @click="qrOpenYn(item.storeNo)">QR</button>
                   </div>
                 </div >
-                <div v-if="item.QROpen" @click="item.QROpen=false">
+
+                <div class="qr_img" v-if="item.QROpen" @click="item.QROpen=false">
+                  <div style="text-align: right;font-size: large;"><i style="margin:0" class="bi bi-x-square-fill"></i></div>
                   <img :src="item.QRcode">
                 </div>
             </li>
             <!-- !리스트 each-->
             <li class="store_list">
                 <div class="store_info">
+                  <div class="store_no">
+                    등록
+                  </div>
                   <div class="store_name">
                     <input type="text" class="wrt_ipt" placeholder="상호명" v-model="state.regStore.storeNm">
                   </div>
