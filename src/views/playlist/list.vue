@@ -24,6 +24,8 @@
           <div id="comp_lst_area">
             <ul class="comp_lst flex fxwrap" v-if="state.musiclist.length > 0">
               <!-- 리스트 each-->
+              {{ state.storeInfo?.adminYn }}
+              {{ state.storeInfo }}
               <li v-for="(item, index) in  state.musiclist " :class="item.playingYn == 'N' ? 'h50' : 'h350'" :key="index"
                 class=" playing">
                 <div class="music_list" :class="item.playingYn == 'Y' ? 'glow' : ''">
@@ -38,12 +40,14 @@
                   <div class="type" :class="item.playingYn == 'Y' ? 'glow2' : ''"> {{ item.playingYn == 'Y' ? '재생중' : '일반'
                   }}
                   </div>
+
                   <div v-if="state.storeInfo?.adminYn == true" class="play_icon" @click="playMusic(item)"><i
                       class="bi bi-youtube"></i></div>
                   <div v-if="state.storeInfo?.adminYn == true" class="type" @click="nextMusic(item)">완료하기</div>
                   <!-- <div class="play_icon" @click="nextMusic(item)"><i class="bi bi-chevron-bar-right"></i></div> -->
                 </div>
-                <div class="player" :class="item.playingYn == 'N' ? 'h0' : 'h300'" v-if="item.playingYn == 'Y'">
+                <div class="player" :class="item.playingYn == 'N' ? 'h0' : 'h300'"
+                  v-if="state.storeInfo?.adminYn == true && item.playingYn == 'Y'">
                   <iframe width="100%" height="300" :src="item.musicUrl" title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen></iframe>
