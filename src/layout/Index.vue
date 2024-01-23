@@ -1,15 +1,15 @@
 <template>
-    <div class="layout" v-if="route.params?.storeNo">
-        <moview_header />
-            <RouterView />
-        <moview_footer />
-    </div>
-    <!-- just url -->
-    <div v-else class="just_index">
+    <div v-if="$route.name == 'layout'" class="just_index">
         <div class="text">
             MUSIC OWNER
         </div>
     </div>
+    <div class="layout" v-else>
+        <moview_header />
+        <RouterView />
+        <moview_footer />
+    </div>
+    <!-- just url -->
 </template>
 <script>
 import { reactive, onMounted, watch, nextTick } from 'vue';

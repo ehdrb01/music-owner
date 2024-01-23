@@ -33,7 +33,7 @@
             <!-- 리스트 each-->
               <li class="store_list" v-for="(item, index) in state.storeList" :key="index">
                 <div class="store_info">
-                  <div class="store_no">
+                  <div class="store_no" @click="goStoreList(item.storeNo)" style="cursor: pointer; border: 1px solid #ddd;border-radius: 10px;">
                     {{ item.storeNo }}
                   </div>
                   <div class="store_name">
@@ -64,7 +64,7 @@
             <li class="store_list">
                 <div class="store_info">
                   <div class="store_no">
-                    등록
+                    -
                   </div>
                   <div class="store_name">
                     <input type="text" class="wrt_ipt" placeholder="상호명" v-model="state.regStore.storeNm">
@@ -215,7 +215,11 @@ export default {
                 console.log(e);
             }
         };
-        
+        const goStoreList = (v) => {
+            router.push({
+                path: '/playList/' + v
+            });
+        };
         const getQrCode = (v) => {
             
             console.log(storeUrl);
@@ -226,7 +230,8 @@ export default {
             updateStore,
             insertStore,
             getQrCode,
-            qrOpenYn
+            qrOpenYn,
+            goStoreList
         };
     }
 };
