@@ -11,7 +11,7 @@ const routes = [
     // },
     {
         redirect: '/index/0',
-        path: '',
+        path: '/',
         name: 'layout',
         component: () => import('@/layout/Index.vue'),
         children: [
