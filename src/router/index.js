@@ -4,14 +4,10 @@ import membermanage from '@/router/modules/membermanage.js';
 import mainPage from '@/router/modules/mainPage.js';
 
 const routes = [
-    // {
-    //     path: '',
-    //     redirect: '/index',
-    //     name: 'index'
-    // },
+
     {
-        redirect: '/index/0',
-        path: '/',
+        redirect: '',
+        path: '',
         name: 'layout',
         component: () => import('@/layout/Index.vue'),
         children: [
