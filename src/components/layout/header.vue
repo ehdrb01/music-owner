@@ -12,7 +12,7 @@
                             $route.name == 'playlist' ? '플레이리스트' :
                                 $route.name == 'adminLogin' ? '관리자로그인' :
                                     $route.name == 'manageStore' ? '스토어관리' :
-                                        '' }}
+                                        'MUSIC OWNER' }}
                     </div>
                     <div class="right" @click="goMain" v-show="!state.isAdmin">
                         <i class="bi bi-signal"></i>
