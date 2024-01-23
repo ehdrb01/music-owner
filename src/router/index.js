@@ -4,13 +4,13 @@ import membermanage from '@/router/modules/membermanage.js';
 import mainPage from '@/router/modules/mainPage.js';
 
 const routes = [
+    // {
+    //     path: '',
+    //     redirect: '/index',
+    //     name: 'index'
+    // },
     {
-        path: '',
-        redirect: '/index',
-        name: 'index'
-    },
-    {
-        redirect: '',
+        redirect: '/index/0',
         path: '',
         name: 'layout',
         component: () => import('@/layout/Index.vue'),
@@ -25,7 +25,7 @@ const routes = [
         name: 'sample',
         component: () => import('@/views/sample/Sample.vue')
     }
-  
+
 
 ];
 const router = createRouter({
