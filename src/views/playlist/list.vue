@@ -40,9 +40,9 @@
                   }}
                   </div>
                   <!-- @click="playMusic(item)" -->
-                  <div v-if="state.storeInfo?.adminYn == true" class="play_icon"><i class="bi bi-youtube"></i></div>
+                  <!-- <div v-if="state.storeInfo?.adminYn == true" class="play_icon"><i class="bi bi-youtube"></i></div> -->
                   <!-- @click="nextMusic(item)" -->
-                  <div v-if="state.storeInfo?.adminYn == true" class="type">완료하기</div>
+                  <!-- <div v-if="state.storeInfo?.adminYn == true" class="type">완료하기</div> -->
                 </div>
                 <div class="player" :class="state.storeInfo?.adminYn && item.playingYn == 'Y' ? 'h300' : 'h0'"
                   v-if="state.storeInfo?.adminYn && item.playingYn == 'Y'">
