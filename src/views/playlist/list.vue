@@ -90,8 +90,6 @@ export default {
       getMusicList();
       playingMusic(state.musiclist[0]);
       this.roof = setInterval(rootFunction(), 60000);
-      playedMusic(state.musiclist[0].reqSongNo);
-      playingMusic(state.musiclist[0]);
     });
     const playMusic = (v) => {
       playingMusic(v);
@@ -167,11 +165,9 @@ export default {
         console.log(e);
       }
     };
-    const rootFunction = () => {
-      getMusicList();
-    };
-    const playFirst = () => {
-      playingMusic(state.musiclist[0]);
+    const rootFunction = async () => {
+      await playedMusic(state.musiclist[0].reqSongNo);
+      await playingMusic(state.musiclist[0]);
     };
     return {
       state,
