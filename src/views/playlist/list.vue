@@ -35,7 +35,7 @@
                     <div class="float">-</div>
                     <div class="song">{{ item.reqSongNm }}</div>
                   </div>
-                  <div v-if="!state.storeInfo?.adminYn" class="type" :class="item.playingYn == 'Y' ? 'green' : ''"> {{
+                  <div class="type" :class="item.playingYn == 'Y' ? 'green' : ''"> {{
                     item.playingYn == 'Y' ? '재생중' : '일반'
                   }}
                   </div>
