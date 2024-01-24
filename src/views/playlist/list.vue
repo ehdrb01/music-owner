@@ -24,8 +24,8 @@
           <div id="comp_lst_area">
             <ul class="comp_lst flex fxwrap" v-if="state.musiclist.length > 0">
               <!-- 리스트 each-->
-              <li v-for="(item, index) in  state.musiclist " :class="state.storeInfo?.adminYn && item.playingYn == 'Y' ? 'h350' : 'h40'" :key="index"
-                class=" playing">
+              <li v-for="(item, index) in  state.musiclist "
+                :class="state.storeInfo?.adminYn && item.playingYn == 'Y' ? 'h350' : 'h40'" :key="index" class=" playing">
                 <div class="music_list" :class="item.playingYn == 'Y' ? 'glow' : ''">
                   <div class="icon" :class="item.playingYn == 'Y' ? 'green' : 'red'">
                     <i class="bi bi-headphones"></i>
@@ -35,14 +35,14 @@
                     <div class="float">-</div>
                     <div class="song">{{ item.reqSongNm }}</div>
                   </div>
-                  <div v-if="!state.storeInfo?.adminYn" class="type" :class="item.playingYn == 'Y' ? 'green' : ''"> {{ item.playingYn == 'Y' ? '재생중' : '일반'
+                  <div v-if="!state.storeInfo?.adminYn" class="type" :class="item.playingYn == 'Y' ? 'green' : ''"> {{
+                    item.playingYn == 'Y' ? '재생중' : '일반'
                   }}
                   </div>
-
-                  <div v-if="state.storeInfo?.adminYn == true" class="play_icon" @click="playMusic(item)"><i
-                      class="bi bi-youtube"></i></div>
-                  <div v-if="state.storeInfo?.adminYn == true" class="type" @click="nextMusic(item)">완료하기</div>
-                  <!-- <div class="play_icon" @click="nextMusic(item)"><i class="bi bi-chevron-bar-right"></i></div> -->
+                  <!-- @click="playMusic(item)" -->
+                  <div v-if="state.storeInfo?.adminYn == true" class="play_icon"><i class="bi bi-youtube"></i></div>
+                  <!-- @click="nextMusic(item)" -->
+                  <div v-if="state.storeInfo?.adminYn == true" class="type">완료하기</div>
                 </div>
                 <div class="player" :class="state.storeInfo?.adminYn && item.playingYn == 'Y' ? 'h300' : 'h0'"
                   v-if="state.storeInfo?.adminYn && item.playingYn == 'Y'">
@@ -70,133 +70,119 @@ import { onMounted, reactive } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { _getMusicList, _updateMusic, _getStore } from '@/api/ourplay.js';
 export default {
-    components: {},
-    props: ['storeNo'],
-    setup() {
-        const router = useRouter();
-        const route = useRoute();
-        const state = reactive({
-            musiclist: [],
-            store: {},
-            storeInfo: {}
-        });
-        onMounted(() => {
-            state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
-            if (state.storeInfo?.storeNo == route.params.storeNo
+  components: {},
+  props: ['storeNo'],
+  setup() {
+    const router = useRouter();
+    const route = useRoute();
+    const state = reactive({
+      musiclist: [],
+      store: {},
+      storeInfo: {}
+    });
+    onMounted(() => {
+      state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
+      if (state.storeInfo?.storeNo == route.params.storeNo
         && state.storeInfo?.userType == 'store') {
-                state.storeInfo.adminYn = true;
-            }
-            getStore();
-            getMusicList();
-        });
+        state.storeInfo.adminYn = true;
+      }
+      getStore();
+      getMusicList();
+      playingMusic(state.musiclist[0]);
+      this.roof = setInterval(rootFunction(), 60000);
+      playedMusic(state.musiclist[0].reqSongNo);
+      playingMusic(state.musiclist[0]);
+    });
+    const playMusic = (v) => {
+      playingMusic(v);
+    };
+    const nextMusic = (v) => {
+      console.log(v.reqSongNo);
+      playedMusic(v.reqSongNo);
+    };
+    const playedMusic = async (v) => {
+      const param = {
+        reqSongNo: v,
+        playedYn: 'Y',
+        playingYn: 'N'
+      };
+      const response = await _updateMusic(param);
+      try {
+        if (response.data.code === 200) {
+          console.log(response);
+          console.log(param.reqSongNo + 'play comp');
+          getMusicList();
+        } else {
+          console.log(response.data.message);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
-    // 음악재생 이동
-        const playMusic = (v) => {
-            playingMusic(v);
-        };
-    // const openMusicBox = (v) => {
-    //   state.musiclist.forEach(element => {
-    //     if (element.reqSongNo != v.reqSongNo) {
-    //       element.openYn = 'N';
-    //     }
-    //   });
-    //   console.log('v.openYn//');
-    //   console.log(v.openYn);
-    //   if (v.openYn == 'N') {
-    //     v.openYn = 'Y';
-    //   } else {
-    //     v.openYn = 'N';
-    //   }
-    //   console.log(v.openYn);
-    // };
-    //다음음악
-        const nextMusic = (v) => {
-            console.log(v.reqSongNo);
-      //재생처리
-            playedMusic(v.reqSongNo);
+    const playingMusic = async (v) => {
+      const param = {
+        reqSongNo: v.reqSongNo,
+        playingYn: 'Y'
+      };
+      const response = await _updateMusic(param);
+      try {
+        if (response.data.code === 200) {
+          console.log(param.reqSongNo + '처리');
+          // getMusicList();
+        } else {
+          console.log(response.data.message);
+        }
+        return v;
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
-        };
-        const playedMusic = async (v) => {
-            const param = {
-                reqSongNo: v,
-                playedYn: 'Y',
-                playingYn: 'N'
-            };
-            const response = await _updateMusic(param);
-            try {
-                if (response.data.code === 200) {
-                    console.log(response);
-                    console.log(param.reqSongNo + '곡 재생완료');
-          //불러오기
-                    getMusicList();
-                } else {
-                    console.log(response.data.message);
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        };
-    //재생 처리
-        const playingMusic = async (v) => {
-            const param = {
-                reqSongNo: v.reqSongNo,
-                playingYn: 'Y'
-            };
-            const response = await _updateMusic(param);
-            try {
-                if (response.data.code === 200) {
-                    console.log(param.reqSongNo + '곡 재생처리');
-          //불러오기
-                    getMusicList();
-                } else {
-                    console.log(response.data.message);
-                }
-                return v;
-            } catch (e) {
-                console.log(e);
-            }
-        };
-    //리스트 조회
-        const getMusicList = async () => {
-            const response = await _getMusicList(route.params.storeNo);
-            try {
-                if (response.data.code === 200) {
-          // response.data.data.list.forEach(element => {
-          //   element.openYn = 'N';
-          // });
-                    state.musiclist = response.data.data.list;
-                    console.log(response);
-                    console.log('getMusicList 조회 되었습니다');
-                } else {
-                    console.log(response.data.message);
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        };
-        const getStore = async () => {
-            const response = await _getStore(route.params.storeNo);
-            try {
-                if (response.data.code === 200) {
-                    console.log(response.data.data);
-                    state.store = response.data.data;
-                } else {
-                    console.log(response.data.message);
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        };
-        return {
-            state,
-            playMusic,
-            nextMusic,
-            getMusicList,
-            getStore,
-            playingMusic,
-            route
-        };
-    }
+    const getMusicList = async () => {
+      const response = await _getMusicList(route.params.storeNo);
+      try {
+        if (response.data.code === 200) {
+          state.musiclist = response.data.data.list;
+          console.log(response);
+          console.log('list 조회 되었습니다');
+          playFirst();
+        } else {
+          console.log(response.data.message);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    const getStore = async () => {
+      const response = await _getStore(route.params.storeNo);
+      try {
+        if (response.data.code === 200) {
+          console.log(response.data.data);
+          state.store = response.data.data;
+        } else {
+          console.log(response.data.message);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    const rootFunction = () => {
+      getMusicList();
+    };
+    const playFirst = () => {
+      playingMusic(state.musiclist[0]);
+    };
+    return {
+      state,
+      playMusic,
+      nextMusic,
+      getMusicList,
+      getStore,
+      playingMusic,
+      route
+    };
+  }
 };
 </script>
 <style scoped></style>
