@@ -78,9 +78,10 @@ export default {
     const state = reactive({
       musiclist: [],
       store: {},
-      storeInfo: {}
+      storeInfo: {},
+      isFirstExecution: true
     });
-    onMounted(() => {
+    onMounted(async () => {
       state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
       if (state.storeInfo?.storeNo == route.params.storeNo
         && state.storeInfo?.userType == 'store') {
@@ -88,27 +89,17 @@ export default {
       }
       getStore();
       getMusicList();
-      playingMusic(state.musiclist[0]);
-      this.roof = setInterval(rootFunction(), 60000);
     });
-    const playMusic = (v) => {
-      playingMusic(v);
-    };
-    const nextMusic = (v) => {
-      console.log(v.reqSongNo);
-      playedMusic(v.reqSongNo);
-    };
     const playedMusic = async (v) => {
+      console.log('END >>> v.reqSongNo END');
       const param = {
-        reqSongNo: v,
+        reqSongNo: v.reqSongNo,
         playedYn: 'Y',
         playingYn: 'N'
       };
       const response = await _updateMusic(param);
       try {
         if (response.data.code === 200) {
-          console.log(response);
-          console.log(param.reqSongNo + 'play comp');
           getMusicList();
         } else {
           console.log(response.data.message);
@@ -126,8 +117,11 @@ export default {
       const response = await _updateMusic(param);
       try {
         if (response.data.code === 200) {
-          console.log(param.reqSongNo + '처리');
-          // getMusicList();
+          console.log(param.reqSongNo + 'ING');
+          setTimeout(() => {
+            console.log(param.reqSongNo + 'ED');
+            playedMusic(v);
+          }, 60 * 1000);
         } else {
           console.log(response.data.message);
         }
@@ -144,7 +138,10 @@ export default {
           state.musiclist = response.data.data.list;
           console.log(response);
           console.log('list 조회 되었습니다');
-          playFirst();
+          // playFirst();
+          if (state.storeInfo.adminYn && state.musiclist.length > 0) {
+            playingMusic(state.musiclist[0]);
+          }
         } else {
           console.log(response.data.message);
         }
@@ -165,14 +162,8 @@ export default {
         console.log(e);
       }
     };
-    const rootFunction = async () => {
-      await playedMusic(state.musiclist[0].reqSongNo);
-      await playingMusic(state.musiclist[0]);
-    };
     return {
       state,
-      playMusic,
-      nextMusic,
       getMusicList,
       getStore,
       playingMusic,
