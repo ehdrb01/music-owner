@@ -9,7 +9,7 @@
               <ul class="lst_area">
                 <li>
                   <!-- <div class="tit fs17 fwt500">상호명</div> -->
-                  <input type="text" class="wrt_ipt readonly store_name" :value="state.store.storeNm + '의 플레이리스트'"
+                  <input type="text" class="wrt_ipt readonly store_name" :value="state.store.storeNm + '의 플레이리스트('+state.nowTimer+')'"
                     readonly="readonly">
                 </li>
               </ul>
@@ -66,110 +66,211 @@
   </div>
 </template>
 <script>
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { _getMusicList, _updateMusic, _getStore } from '@/api/ourplay.js';
+import { _getMusicList, _updateMusic, _getStore, _initMusicList, _getLastPlayed } from '@/api/ourplay.js';
 export default {
-  components: {},
-  props: ['storeNo'],
-  setup() {
-    const router = useRouter();
-    const route = useRoute();
-    const state = reactive({
-      musiclist: [],
-      store: {},
-      storeInfo: {},
-      isFirstExecution: true
-    });
-    onMounted(async () => {
-      state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
-      if (state.storeInfo?.storeNo == route.params.storeNo
+    components: {},
+    props: ['storeNo'],
+    setup() {
+        const router = useRouter();
+        const route = useRoute();
+        const state = reactive({
+            musiclist: [],
+            insideList: [],
+            store: {},
+            storeInfo: {},
+            isFirstExecution: true,
+            nowTimer: 0,
+            lastPLayed: 0,
+            lastCalled: 0,
+            minute: 0,
+            seconde: 0
+        });
+        watch(state.insideList, (newValue, oldValue) => {
+            console.log('insideList 변경' + newValue + '/' + oldValue);
+            // newValue, oldValue;
+        }, {
+            immediate: true,
+            deep: true
+        });
+        onMounted(async () => {
+            state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
+            if (state.storeInfo?.storeNo == route.params.storeNo
         && state.storeInfo?.userType == 'store') {
-        state.storeInfo.adminYn = true;
-      }
-      getStore();
-      getMusicList();
-    });
-    const playedMusic = async (v) => {
-      console.log('END >>> v.reqSongNo END');
-      const param = {
-        reqSongNo: v.reqSongNo,
-        playedYn: 'Y',
-        playingYn: 'N'
-      };
-      const response = await _updateMusic(param);
-      try {
-        if (response.data.code === 200) {
-          getMusicList();
-        } else {
-          console.log(response.data.message);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
+                state.storeInfo.adminYn = true;
+            }
+            getStore();
+            lastPLayed();
+            goMusic();
+            setInterval(() => {
+                getReadyMusic();
+            }, 5000);
+            setInterval(() => {
+                goMusic();
+            },  4 * 60 * 1000);
 
-    const playingMusic = async (v) => {
-      const param = {
-        reqSongNo: v.reqSongNo,
-        playingYn: 'Y'
-      };
-      const response = await _updateMusic(param);
-      try {
-        if (response.data.code === 200) {
-          console.log(param.reqSongNo + 'ING');
-          setTimeout(() => {
-            console.log(param.reqSongNo + 'ED');
-            playedMusic(v);
-          }, 60 * 1000);
-        } else {
-          console.log(response.data.message);
-        }
-        return v;
-      } catch (e) {
-        console.log(e);
-      }
-    };
+            setInterval(() => {
+                state.nowTimer++;
+            }, 1000, true);
+      
+            
+        });
+        const playedMusic = async () => {
+            const param = {
+                reqSongNo: state.musiclist[0].reqSongNo,
+                playedYn: 'Y',
+                playingYn: 'N'
+            };
+            const response = await _updateMusic(param);
+            try {
+                if (response.data.code === 200) {
+                    console.log('playedMusic >>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+              // getMusicList();
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
 
-    const getMusicList = async () => {
-      const response = await _getMusicList(route.params.storeNo);
-      try {
-        if (response.data.code === 200) {
-          state.musiclist = response.data.data.list;
-          console.log(response);
-          console.log('list 조회 되었습니다');
-          // playFirst();
-          if (state.storeInfo.adminYn && state.musiclist.length > 0) {
-            playingMusic(state.musiclist[0]);
-          }
-        } else {
-          console.log(response.data.message);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    const getStore = async () => {
-      const response = await _getStore(route.params.storeNo);
-      try {
-        if (response.data.code === 200) {
-          console.log(response.data.data);
-          state.store = response.data.data;
-        } else {
-          console.log(response.data.message);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    return {
-      state,
-      getMusicList,
-      getStore,
-      playingMusic,
-      route
-    };
-  }
+        const playingMusic = async () => {
+            const param = {
+                reqSongNo: state.musiclist[0].reqSongNo,
+                playingYn: 'Y'
+            };
+            const response = await _updateMusic(param);
+            try {
+                if (response.data.code === 200) {
+                    getMusicList();
+                    console.log('playingMusic>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log(param.reqSongNo);
+      
+                } else {
+                    console.log(response.data.message);
+                }
+                // return v;
+            } catch (e) {
+                console.log(e);
+            }
+        };
+
+        const getMusicList = async () => {
+            const param = {
+                reqStoreNo: route.params.storeNo
+            };
+            const response = await _getMusicList(param);
+            try {
+                if (response.data.code === 200) {
+                    console.log('getMusicList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log(response);
+                    state.musiclist = response.data.data.list;
+                    state.nowTimer = 0;
+                    // if (response.data.data.list.length > 0) {
+                        // console.log('신청곡 재생');
+                        // await playingMusic(response.data.data.list[0]);
+                    // }
+                    //  else {
+                    //     console.log('신청곡 대기중');
+                    //     await waitList();
+                    // }
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        const getStore = async () => {
+            const response = await _getStore(route.params.storeNo);
+            try {
+                if (response.data.code === 200) {
+                    console.log('getStore>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log(response.data.data);
+                    state.store = response.data.data;
+                    initMusicList(state.store);
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        const initMusicList =  async () => {
+            const param = {
+                reqStoreNo: route.params.storeNo
+            };
+            const response = await _initMusicList(param);
+            try {
+                if (response.data.code === 200) {
+                    console.log('initMusicList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    // console.log(response.data.data);
+                    // state.store = response.data.data;
+                    // initMusicList(state.store);
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+          
+        };
+
+        const getReadyMusic =  async () => {
+            console.log('곡 수집중');
+            const param = {
+                reqStoreNo: route.params.storeNo
+            };
+            const response = await _getMusicList(param);
+            try {
+                if (response.data.code === 200) {
+                    if (state.musiclist.length == 0 && response.data.data.list.length > 0) {
+                        location.reload();
+                        // state.musiclist = response.data.data.list;
+                        // console.log(state.insideList);
+                    }
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        const lastPLayed = async () => {
+            const param = {
+                reqStoreNo: route.params.storeNo
+            };
+            const response = await _getLastPlayed(param);
+            try {
+                if (response.data.code === 200) {
+                    console.log('lastPlayed songNo:' + response.data.data);
+                    state.lastPLayed = response.data.data;
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+            
+        };
+        const goMusic = () => {
+            getMusicList().then(() => {
+                if (state.musiclist.length > 0) {
+                    playingMusic().then(() => {
+                        playedMusic();
+                    });
+                }
+            });
+        };
+        return {
+            state,
+            getMusicList,
+            getStore,
+            playingMusic,
+            route
+        };
+    }
 };
 </script>
 <style scoped></style>

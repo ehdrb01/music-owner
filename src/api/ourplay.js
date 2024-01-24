@@ -38,9 +38,15 @@ export const _insertMusic = async (params) => {
 };
 
 //음악 리스트
-export const _getMusicList = async (storeNo) => {
-    return await $api.get('/ourplay/music/list/' + storeNo);
+export const _getMusicList = async (params) => {
+    return await $api.put('/ourplay/music/list', params);
 };
 export const _updateMusic = async (reqSongNo) => {
     return await $api.put('/ourplay/music/update/', reqSongNo);
+};
+export const _initMusicList = async (params) => {
+    return await $api.put('/ourplay/music/init/', params);
+};
+export const _getLastPlayed = async (params) => {
+    return await $api.put('/ourplay/music/lastPlayed', params);
 };

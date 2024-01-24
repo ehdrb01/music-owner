@@ -523,16 +523,22 @@ html::-webkit-scrollbar-track {
 .header_title .right {
     color: #15d2b1;
     position: fixed;
-    right: 5px;
+    right: 8px;
     font-size: 2em;
     float: left;
+    width:26px;
+    height:26px;
+    top:6px
 }
 .header_title .left {
     color: #15d2b1;
     position: fixed;
-    left: 16px;
+    left: 10px;
     font-size: 2em;
     float: left;
+    width:26px;
+    height:26px;
+    top:6px;
 }
 
 /*index*/

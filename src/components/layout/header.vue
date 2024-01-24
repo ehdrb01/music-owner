@@ -4,7 +4,8 @@
             <div class="inner inner1093 w100 m_center flex justy_btw alc bc_01">
                 <div class="header_title">
                     <div v-if="route.params.storeNo" class="left" @click="goList" v-show="!state.isAdmin">
-                        <i class="bi bi-music-player-fill"></i>
+                        <img src="@/assets/img/music_list.png" alt="" style="width:100%;">
+                        <!-- <img src=""> -->
                     </div>
                     <div class="title">
                         {{ $route.name ==
@@ -15,7 +16,7 @@
                                         'MUSIC OWNER' }}
                     </div>
                     <div  v-if="route.params.storeNo" class="right" @click="goMain" v-show="!state.isAdmin">
-                        <i class="bi bi-signal"></i>
+                        <img src="@/assets/img/music_write.png" alt="" style="width:100%;">
                     </div>
                 </div>
             </div>
