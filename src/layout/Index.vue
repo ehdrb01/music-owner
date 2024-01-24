@@ -1,24 +1,33 @@
 <template>
-    <div class="layout">
+    <div v-if="$route.name == 'layout'" class="just_index">
+        <div class="text">
+            MUSIC OWNER
+        </div>
+    </div>
+    <div class="layout" v-else>
         <moview_header />
-            <RouterView />
+        <RouterView />
         <moview_footer />
     </div>
+    <!-- just url -->
 </template>
 <script>
 import { reactive, onMounted, watch, nextTick } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import moview_header from '@/components/layout/header.vue';
 import moview_footer from '@/components/layout/footer.vue';
-
+import { _getStore } from '@/api/ourplay.js';
 export default {
     components: { moview_header, moview_footer },
     setup() {
         const router = useRouter();
         const route = useRoute();
         const state = reactive({
+            
         });
+
         return {
+            route
         };
     }
 };

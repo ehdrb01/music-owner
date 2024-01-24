@@ -45,7 +45,7 @@
               <div class="tit fs17 fwt500">노래제목</div><input type="text" class="wrt_ipt" v-model="state.req.reqSongNm">
             </li>
             <li>
-              <div class="tit fs17 fwt500">노래영상url</div><input type="text" class="wrt_ipt" v-model="state.req.musicUrl">
+              <div class="tit fs17 fwt500">노래영상url(유투브)</div><input type="text" class="wrt_ipt" v-model="state.req.musicUrl">
             </li>
             <li>
               <div class="prv_agree fs14" style="margin-top:12px;">
