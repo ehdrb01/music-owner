@@ -556,7 +556,9 @@ html::-webkit-scrollbar-track {
 #write .wrt_sec_2 .cate_area li {
     width: 62px;
 }
-
+#write {
+    padding-top: 1.3rem;
+}
 #write .title,
 #write .tit,
 #write label {

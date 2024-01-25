@@ -6,6 +6,7 @@
 }
 #header .inner {
     height: 45px;
+    border-bottom: 1px solid #1a0e18;
 }
 #header .logo {
     max-width: 14.2rem;
@@ -47,6 +48,7 @@
         background: #fff;
     }
     #header .inner {
+        border-bottom: 1px solid #1a0e18;
         height: 45px;
     }
     #header .logo {
@@ -1145,7 +1147,6 @@
     .daterangepicker .drp-buttons .btn {
         margin: 0;
     }
-   
 }
 
 @media all and (max-width: 820px) {
