@@ -10,7 +10,7 @@
                                 <li>
                                     <!-- <div class="tit fs17 fwt500">상호명</div> -->
                                     <input type="text" class="wrt_ipt readonly store_name"
-                                        :value="state.store.storeNm + '의 ' + state.adminYn == 'Y' ? '관리자 ' : '' + '플레이리스트(' + state.nowTimer + ')'"
+                                        :value="state.store.storeNm + '의' + state.storeInfo?.adminYn == true ? '관리자의 ' : '' + ' 플레이리스트 (' + state.nowTimer + ')'"
                                         readonly="readonly">
                                 </li>
                             </ul>
