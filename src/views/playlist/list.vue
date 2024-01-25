@@ -112,7 +112,7 @@ export default {
                 }, 5000);
                 setInterval(() => {
                     goMusic();
-                }, timer);
+                }, state.timer);
             } else {
                 setInterval(() => {
                     getMusicList();
@@ -259,7 +259,7 @@ export default {
                         state.nowTimer = 0;
                         setTimeout(() => {
                             playedMusic();
-                        }, timer - (10 * 1000));
+                        }, state.timer - (10 * 1000));
                     });
                 }
             });
