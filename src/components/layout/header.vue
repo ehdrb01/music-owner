@@ -15,7 +15,7 @@
                                     $route.name == 'manageStore' ? '스토어관리' :
                                         'MUSIC OWNER' }}
                     </div>
-                    <div  v-if="route.params.storeNo" class="right" @click="goMain" v-show="!state.isAdmin">
+                    <div v-if="route.params.storeNo" class="right" @click="goMain" v-show="!state.isAdmin">
                         <img src="@/assets/img/music_write.png" alt="" style="width:100%;">
                     </div>
                 </div>
@@ -37,7 +37,7 @@ export default {
             isAdmin: false
         });
         onMounted(() => {
-            state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
+            // state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
             // if (state.storeInfo?.userType == 'admin') {
             //     state.isAdmin = true;
             // } else {
