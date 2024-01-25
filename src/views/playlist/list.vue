@@ -113,15 +113,14 @@ export default {
                 setInterval(() => {
                     goMusic();
                 }, timer);
-                setInterval(() => {
-                    state.nowTimer++;
-                }, 1000, true);
             } else {
                 setInterval(() => {
                     getMusicList();
                 }, 5 * 1000);
             }
-
+            setInterval(() => {
+                state.nowTimer++;
+            }, 1000, true);
 
         });
         const playedMusic = async () => {
