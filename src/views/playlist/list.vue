@@ -88,7 +88,10 @@ export default {
             nowTimer: 0,
             lastPLayed: 0,
             lastCalled: 0,
-            timer: 4 * 60 * 1000
+            timer: 4 * 60 * 1000,
+            intervalReady: null,
+            intervalGoMs: null,
+            intervalGetMs: null
 
         });
         watch(state.insideList, (newValue, oldValue) => {
@@ -105,24 +108,22 @@ export default {
             if (state.storeInfo?.storeNo == route.params.storeNo
                 && state.storeInfo?.userType == 'store') {
                 state.storeInfo.adminYn = true;
-                const intervalReady = null;
-                const intervalGoMs = null;
-                const intervalGetMs = null;
-                clearInterval(intervalReady);
-                clearInterval(intervalGoMs);
-                clearInterval(intervalGetMs);
+
+                clearInterval(state.intervalReady);
+                clearInterval(state.intervalGoMs);
+                clearInterval(state.intervalGetMs);
 
                 goMusic();
                 // eslint-disable-next-line no-const-assign
-                intervalReady = setInterval(() => {
+                state.intervalReady = setInterval(() => {
                     getReadyMusic();
                 }, 5000);
                 // eslint-disable-next-line no-const-assign
-                intervalGoMs = setInterval(() => {
+                state.intervalGoMs = setInterval(() => {
                     goMusic();
                 }, state.timer);
             } else {
-                intervalGetMs = setInterval(() => {
+                state.intervalGetMs = setInterval(() => {
                     getMusicList();
                 }, 5 * 1000);
             }
