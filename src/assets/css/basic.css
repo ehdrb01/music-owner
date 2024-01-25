@@ -530,6 +530,7 @@ html::-webkit-scrollbar-track {
     height: 26px;
     top: 6px;
 }
+
 .header_title .left {
     color: #15d2b1;
     position: fixed;
@@ -597,6 +598,9 @@ input[type='password'].readonly {
     min-height: 460px;
     padding-top: 1.5rem;
     padding-bottom: 70px;
+}
+.right .sel,.left .sel{
+    filter:grayscale(1)
 }
 @media all and (max-width: 820px) {
     #playlist {

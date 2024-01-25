@@ -4,8 +4,8 @@
             <div class="inner inner1093 w100 m_center flex justy_btw alc bc_01">
                 <div class="header_title">
                     <div v-if="route.params.storeNo" class="left" @click="goList" v-show="!state.isAdmin">
-                        <img src="@/assets/img/music_list.png" alt="" style="width:100%;">
-                        <!-- <img src=""> -->
+                        <img :class="$route.name == 'index'?'sel':''" src="@/assets/img/music_list_sel.png" alt="" style="width: 88%; height: 74%;">
+                        <!-- <img v-else src="@/assets/img/music_list.png" alt="" style="width:100%;"> -->
                     </div>
                     <div class="title">
                         {{ $route.name ==
@@ -16,7 +16,8 @@
                                         'MUSIC OWNER' }}
                     </div>
                     <div v-if="route.params.storeNo" class="right" @click="goMain" v-show="!state.isAdmin">
-                        <img src="@/assets/img/music_write.png" alt="" style="width:100%;">
+                        <img :class="$route.name == 'playlist'?'sel':''" src="@/assets/img/music_write_sel.png" alt="" style="width: 88%; height: 80%;">
+                        <!-- <img v-else src="@/assets/img/music_write.png" alt="" style="width:100%;"> -->
                     </div>
                 </div>
             </div>
