@@ -45,7 +45,7 @@
               <div class="tit fs17 fwt500">노래제목</div><input type="text" class="wrt_ipt" v-model="state.req.reqSongNm">
             </li>
             <li>
-              <div class="tit fs17 fwt500">노래영상url(유투브)</div><input type="text" class="wrt_ipt"
+              <div class="tit fs17 fwt500">노래영상url(유튜브)</div><input type="text" class="wrt_ipt"
                 v-model="state.req.musicUrl">
             </li>
             <li>
@@ -88,74 +88,74 @@ import { useRouter, useRoute } from 'vue-router';
 import { _getStore, _insertMusic } from '@/api/ourplay.js';
 
 export default {
-  components: {},
-  props: ['storeNo'],
-  setup(props) {
-    const router = useRouter();
-    const route = useRoute();
-    const state = reactive({
-      store: {},
-      req: {
+    components: {},
+    props: ['storeNo'],
+    setup(props) {
+        const router = useRouter();
+        const route = useRoute();
+        const state = reactive({
+            store: {},
+            req: {
 
-      },
-      errorMSg: ''
-    });
-    onMounted(() => {
-      getStore();
-      state.req.reqStoreNo = props.storeNo;
-      console.log('storeNo:', props.storeNo);
-    });
-    const getStore = async () => {
-      const response = await _getStore(props.storeNo);
-      try {
-        if (response.data.code === 200) {
-          console.log(response.data.data);
-          state.store = response.data.data;
-        } else {
-          console.log(response.data.message);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    const insertMusic = async () => {
-      if (!state.req.reqSingerNm) {
+            },
+            errorMSg: ''
+        });
+        onMounted(() => {
+            getStore();
+            state.req.reqStoreNo = props.storeNo;
+            console.log('storeNo:', props.storeNo);
+        });
+        const getStore = async () => {
+            const response = await _getStore(props.storeNo);
+            try {
+                if (response.data.code === 200) {
+                    console.log(response.data.data);
+                    state.store = response.data.data;
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        const insertMusic = async () => {
+            if (!state.req.reqSingerNm) {
         // toast('d', 3000, 'success');
-        state.errorMSg = '가수를 입력해주세요';
-        return;
-      }
-      if (!state.req.reqSongNm) {
-        state.errorMSg = '노래를 입력해주세요';
-        return;
-      }
-      if (!state.req.musicUrl) {
-        state.errorMSg = '유투브 링크를 입력해주세요';
-        return;
-      }
-      state.errorMSg = '';
-      const response = await _insertMusic(state.req);
-      try {
-        if (response.data.code === 200) {
-          alert('신청곡이 등록 되었습니다');
-          state.req.reqSingerNm = '';
-          state.req.reqSongNm = '';
-          state.req.musicUrl = '';
-          goList();
-        } else {
-          console.log(response.data.message);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    const goList = () => {
-      router.push({
-        path: '/playlist/' + route.params.storeNo
-      });
-    };
+                state.errorMSg = '가수를 입력해주세요';
+                return;
+            }
+            if (!state.req.reqSongNm) {
+                state.errorMSg = '노래를 입력해주세요';
+                return;
+            }
+            if (!state.req.musicUrl) {
+                state.errorMSg = '유투브 링크를 입력해주세요';
+                return;
+            }
+            state.errorMSg = '';
+            const response = await _insertMusic(state.req);
+            try {
+                if (response.data.code === 200) {
+                    alert('신청곡이 등록 되었습니다');
+                    state.req.reqSingerNm = '';
+                    state.req.reqSongNm = '';
+                    state.req.musicUrl = '';
+                    goList();
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        const goList = () => {
+            router.push({
+                path: '/playlist/' + route.params.storeNo
+            });
+        };
 
-    return { state, goList, insertMusic, props };
-  }
+        return { state, goList, insertMusic, props };
+    }
 };
 </script>
 

@@ -1,9 +1,10 @@
 <template>
     <header id="header">
+        <div style="color: aliceblue;">//{{ state.isStore }}//</div>
         <div class="header_inner bc1 fixed w100 top0 bc_01">
             <div class="inner inner1093 w100 m_center flex justy_btw alc bc_01">
                 <div class="header_title">
-                    <div v-if="route.params.storeNo" class="left" @click="goList" v-show="!state.isAdmin">
+                    <div v-if="route.params.storeNo" class="left" @click="goList">
                         <img :class="$route.name == 'index'?'sel':''" src="@/assets/img/music_list_sel.png" alt="" style="width: 88%; height: 74%;">
                         <!-- <img v-else src="@/assets/img/music_list.png" alt="" style="width:100%;"> -->
                     </div>
@@ -15,7 +16,7 @@
                                     $route.name == 'manageStore' ? '스토어관리' :
                                         'MUSIC OWNER' }}
                     </div>
-                    <div v-if="route.params.storeNo" class="right" @click="goMain" v-show="!state.isAdmin">
+                    <div v-if="route.params.storeNo" class="right" @click="goMain" v-show="!state.isStore">
                         <img :class="$route.name == 'playlist'?'sel':''" src="@/assets/img/music_write_sel.png" alt="" style="width: 88%; height: 80%;">
                         <!-- <img v-else src="@/assets/img/music_write.png" alt="" style="width:100%;"> -->
                     </div>
@@ -35,15 +36,15 @@ export default {
         const state = reactive({
             path: useRoute().path,
             storeInfo: {},
-            isAdmin: false
+            isStore: false
         });
         onMounted(() => {
-            // state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
-            // if (state.storeInfo?.userType == 'admin') {
-            //     state.isAdmin = true;
-            // } else {
-            //     state.isAdmin = false;
-            // }
+            state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
+            if (state.storeInfo?.userType == 'store') {
+                state.isStore = true;
+            } else {
+                state.isStore = false;
+            }
         });
 
         const goList = () => {

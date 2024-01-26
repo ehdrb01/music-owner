@@ -89,24 +89,21 @@ export default {
             lastPLayed: 0,
             lastCalled: 0,
             timer: 4 * 60 * 1000,
+            // timer: 10 * 1000,
             intervalReady: null,
             intervalGoMs: null,
             intervalGetMs: null
 
         });
-        watch(state.insideList, (newValue, oldValue) => {
-            console.log('insideList 변경' + newValue + '/' + oldValue);
-            // newValue, oldValue;
-        }, {
-            immediate: true,
-            deep: true
-        });
+        
         onMounted(async () => {
             getStore();
             lastPLayed();
             state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
             if (state.storeInfo?.storeNo == route.params.storeNo
                 && state.storeInfo?.userType == 'store') {
+
+                console.log('스토어 계정입니다');
                 state.storeInfo.adminYn = true;
 
                 clearInterval(state.intervalReady);
@@ -123,11 +120,11 @@ export default {
                     goMusic();
                 }, state.timer);
             } else {
+                console.log('사용자 입니다');
                 state.intervalGetMs = setInterval(() => {
                     getMusicList();
                 }, 5 * 1000);
             }
-
 
             setInterval(() => {
                 state.nowTimer++;
@@ -143,7 +140,7 @@ export default {
             const response = await _updateMusic(param);
             try {
                 if (response.data.code === 200) {
-                    console.log('playedMusic >>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log('현재곡을 재생 완료 처리 합니다');
                     // getMusicList();
                 } else {
                     console.log(response.data.message);
@@ -162,7 +159,7 @@ export default {
             try {
                 if (response.data.code === 200) {
                     getMusicList();
-                    console.log('playingMusic>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log(state.musiclist[0].reqSongNm + '신청곡을 플레이 합니다');
                     console.log(param.reqSongNo);
 
                 } else {
@@ -181,7 +178,7 @@ export default {
             const response = await _getMusicList(param);
             try {
                 if (response.data.code === 200) {
-                    console.log('getMusicList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log('플레이 리스트정보를 읽어 옵니다.');
                     console.log(response);
                     state.musiclist = response.data.data.list;
                 } else {
@@ -198,7 +195,7 @@ export default {
                     console.log('getStore>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                     console.log(response.data.data);
                     state.store = response.data.data;
-                    initMusicList(state.store);
+                    // initMusicList(state.store);
                 } else {
                     console.log(response.data.message);
                 }
@@ -270,7 +267,7 @@ export default {
                         state.nowTimer = 0;
                         setTimeout(() => {
                             playedMusic();
-                        }, state.timer - (10 * 1000));
+                        }, state.timer - (3 * 1000));
                     });
                 }
             });
