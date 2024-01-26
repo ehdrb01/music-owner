@@ -1,7 +1,7 @@
 <template>
     <header id="header">
-        <div style="color: aliceblue;">//{{ state.isStore }}//</div>
         <div class="header_inner bc1 fixed w100 top0 bc_01">
+            <!-- <div style="color: ;">{{state.storeInfo}}//{{ state.isStore }}//</div> -->
             <div class="inner inner1093 w100 m_center flex justy_btw alc bc_01">
                 <div class="header_title">
                     <div v-if="route.params.storeNo" class="left" @click="goList">
@@ -16,7 +16,7 @@
                                     $route.name == 'manageStore' ? '스토어관리' :
                                         'MUSIC OWNER' }}
                     </div>
-                    <div v-if="route.params.storeNo" class="right" @click="goMain" v-show="!state.isStore">
+                    <div v-if="route.params.storeNo" class="right" @click="goMain" v-show="state.storeInfo?.userType!='store'">
                         <img :class="$route.name == 'playlist'?'sel':''" src="@/assets/img/music_write_sel.png" alt="" style="width: 88%; height: 80%;">
                         <!-- <img v-else src="@/assets/img/music_write.png" alt="" style="width:100%;"> -->
                     </div>
@@ -39,14 +39,25 @@ export default {
             isStore: false
         });
         onMounted(() => {
+            getStoreInfo();
+            emitter.$on('getStoreInfoHeader', (data) => {
+                state.storeInfo = data;
+                console.log('getStoreInfo header');
+                // getStoreInfo();
+                // state.storeInfo = data;
+                // console.log('getStoreInfo header');
+                // console.log(data);
+                // getStoreInfo();
+            });
+        });
+        const getStoreInfo = () => {
             state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
             if (state.storeInfo?.userType == 'store') {
                 state.isStore = true;
             } else {
                 state.isStore = false;
             }
-        });
-
+        };
         const goList = () => {
             router.push({
                 path: '/playlist/' + route.params.storeNo

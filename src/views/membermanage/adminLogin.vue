@@ -55,6 +55,7 @@ export default {
             }
         });
         const login = async () => {
+            localStorage.clear();
             const response = await _login(state.param);
             console.log('response');
             console.log(response.data.data);
@@ -69,7 +70,8 @@ export default {
                     } else if (response.data.data.userType == 'store') {
                         getStoreList();
                     }
-                    emitter.$emit('getStoreInfo', response.data.data);
+                    emitter.$emit('getStoreInfoFooter', response.data.data);
+                    emitter.$emit('getStoreInfoHeader', response.data.data);
                 } else if (response.data.code === 2001 || response.data.code === 2002) {
                     state.errorText = '비밀번호를 확인해주세요';
                 } else if (response.data.code === 2004) {

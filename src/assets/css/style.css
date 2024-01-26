@@ -1153,7 +1153,7 @@
     #write .inner {
         max-width: 89%;
         /* padding: 2.8rem 0 5rem; */
-        overflow-y: scroll;
+        /* overflow-y: scroll; */
         padding-bottom: 80px;
     }
     #write .wrt_sec .title_area {

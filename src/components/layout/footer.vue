@@ -15,7 +15,7 @@
                         <div>통신판매업신고   제 2023-서울용산-00000</div>
                         <div style="cursor: pointer;float:left;" v-if="!state.storeInfo" @click="goLogin"> [관리자모드] </div>
                         <div v-if="state.storeInfo"  @click="goLogout">
-                            <div style="float:left;">loginID : {{state.storeInfo.id}}</div>
+                            <div style="float:left;">loginID : {{state.storeInfo.userId||state.storeInfo.id}}</div>
                             <div style="cursor: pointer;float:left;">[로그아웃] </div>
                         </div>
                     </div>
@@ -37,16 +37,18 @@ export default {
         });
         onMounted(() => {
             getStoreInfo();
-            emitter.$on('getStoreInfo', (data) => {
-                console.log('getStoreInfo');
-                console.log(data);
-                getStoreInfo();
+            
+            emitter.$on('getStoreInfoFooter', (data) => {
+                state.storeInfo = data;
+                console.log('getStoreInfo footer');
             });
         });
         
         const getStoreInfo = () => {
             state.storeInfo = JSON.parse(localStorage.getItem('userInfo'));
             if (state.storeInfo?.userType == 'store') {
+                console.log('state.storeInfo조회');
+                console.log(state.storeInfo);
                 state.isStore = true;
             } else {
                 state.isStore = false;
@@ -59,9 +61,11 @@ export default {
             });
         };
         const goLogout = () => {
-            localStorage.removeItem('userInfo');
+            // localStorage.removeItem('userInfo');
             getStoreInfo();
+            localStorage.clear();
             alert('로그아웃 되었습니다');
+            window.location.reload(true);
         };
        
         return {state, goLogin, goLogout};
