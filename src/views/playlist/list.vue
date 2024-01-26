@@ -26,9 +26,9 @@
                         <ul class="comp_lst flex fxwrap" v-if="state.musiclist.length > 0">
                             <!-- 리스트 each-->
                             <li v-for="(item, index) in  state.musiclist "
-                                :class="state.storeInfo?.adminYn && item.playingYn == 'Y' ? 'h350' : 'h40'" :key="index"
+                                :class="[state.storeInfo?.adminYn && item.playingYn == 'Y' ? 'h350' : 'h40',item.playingYn == 'Y' ? 'glow' : '']" :key="index"
                                 class=" playing">
-                                <div class="music_list" :class="item.playingYn == 'Y' ? 'glow' : ''">
+                                <div class="music_list">
                                     <div class="icon" :class="item.playingYn == 'Y' ? 'green' : 'red'">
                                         <i class="bi bi-headphones"></i>
                                     </div>
