@@ -120,6 +120,7 @@ export default {
                     goMusic();
                 }, state.timer);
             } else {
+                getMusicList();
                 console.log('사용자 입니다');
                 state.intervalGetMs = setInterval(() => {
                     getMusicList();
