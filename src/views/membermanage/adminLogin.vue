@@ -42,64 +42,66 @@ import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
 import { _login, _getStoreNo } from '@/api/ourplay.js';
 export default {
-  setup() {
-    const router = useRouter();
-    const route = useRoute();
-    const store = useStore();
-    const state = reactive({
-      errorText: '',
-      param: {
-        userId: '',
-        password: ''
-      }
-    });
-    const login = async () => {
-      const response = await _login(state.param);
-      console.log('response');
-      console.log(response.data.data);
-      try {
-        if (response.data.code === 200) {
-          if (response.data.data.userType == 'admin') {
-            store.dispatch('authModule/loginAction',
-              { id: state.param.userId, pass: state.param.password, token: response.data.data.token, userType: response.data.data.userType });
-            state.errorText = '';
-            router.push('/manageStore');
+    setup() {
+        // const { emit } = getCurrentInstance();
+        const router = useRouter();
+        const route = useRoute();
+        const store = useStore();
+        const state = reactive({
+            errorText: '',
+            param: {
+                userId: '',
+                password: ''
+            }
+        });
+        const login = async () => {
+            const response = await _login(state.param);
+            console.log('response');
+            console.log(response.data.data);
+            try {
+                if (response.data.code === 200) {
+                    if (response.data.data.userType == 'admin') {
+                        store.dispatch('authModule/loginAction',
+                            { id: state.param.userId, pass: state.param.password, token: response.data.data.token, userType: response.data.data.userType });
+                        state.errorText = '';
+                        router.push('/manageStore');
 
-          } else if (response.data.data.userType == 'store') {
-            getStoreList();
-          }
-        } else if (response.data.code === 2001 || response.data.code === 2002) {
-          state.errorText = '비밀번호를 확인해주세요';
-        } else if (response.data.code === 2004) {
-          state.errorText = '아이디를 확인해주세요';
-        } else {
-          console.log(response.data.message);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    const getStoreList = async () => {
-      const response = await _getStoreNo(state.param.userId);
-      try {
-        if (response.data.code === 200) {
-          console.log(response.data.data.storeNo);
-          store.dispatch('authModule/loginAction',
-            { id: state.param.userId, pass: state.param.password, token: response.data.data.token, userType: 'store', storeNo: response.data.data.storeNo });
-          state.errorText = '';
-          router.push({
-            path: '/playlist/' + response.data.data.storeNo
-          });
+                    } else if (response.data.data.userType == 'store') {
+                        getStoreList();
+                    }
+                    emitter.$emit('getStoreInfo', response.data.data);
+                } else if (response.data.code === 2001 || response.data.code === 2002) {
+                    state.errorText = '비밀번호를 확인해주세요';
+                } else if (response.data.code === 2004) {
+                    state.errorText = '아이디를 확인해주세요';
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        const getStoreList = async () => {
+            const response = await _getStoreNo(state.param.userId);
+            try {
+                if (response.data.code === 200) {
+                    console.log(response.data.data.storeNo);
+                    store.dispatch('authModule/loginAction',
+                        { id: state.param.userId, pass: state.param.password, token: response.data.data.token, userType: 'store', storeNo: response.data.data.storeNo });
+                    state.errorText = '';
+                    router.push({
+                        path: '/playlist/' + response.data.data.storeNo
+                    });
 
 
-        } else {
-          console.log(response.data.message);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    return { state, login };
-  }
+                } else {
+                    console.log(response.data.message);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        return { state, login };
+    }
 };
 </script>
